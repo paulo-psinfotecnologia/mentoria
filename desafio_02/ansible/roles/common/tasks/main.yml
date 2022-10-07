@@ -1,0 +1,46 @@
+- name: Atualizar os Repositorios
+  apt: update_cache=yes #apt update
+
+- name: Atualizar Pacotes
+  apt:
+    name: "*" #apt upgrade
+    state: latest
+
+- name: Instalacao de Pacotes Essenciais
+  apt:
+    name:
+      - vim
+      - curl
+      - telnet
+      - unzip
+      - wget
+      - net-tools
+      - htop
+      - nmap
+      - nginx
+      
+- name: Configurar o hostname 
+  ansible.builtin.hostname:
+    name: desafio02      
+
+- name: Adicionar usuario psinfo
+  user:
+    name: psinfo
+    shell: /bin/bash
+    home: /home/psinfo
+
+- name: Adicionar usuario psinfo no SUDOERS
+  lineinfile:
+    dest: /etc/sudoers
+    line: "psinfo     ALL=(ALL:ALL) NOPASSWD:   ALL"
+
+- name: Configurar Authorized key para o usuario psinfo
+  authorized_key:
+    user: psinfo
+    state: present
+    key: "{{  lookup('file', 'files/id_rsa.pub') }}"
+
+
+
+
+
