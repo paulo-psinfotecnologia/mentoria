@@ -15,6 +15,8 @@ Instalar nginx na máquina
 Subir os arquivos para um repositório no Github
 
 
+
+
 Desafio 02
 
 Criar máquina virtual no vagrant, em seguida padronizar com uma role common (Ansible)
